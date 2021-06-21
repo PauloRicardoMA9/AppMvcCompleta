@@ -21,13 +21,13 @@ using ma9.App;
 #nullable disable
 #nullable restore
 #line 2 "C:\Users\paulo\Documents\Developer\Projetos\.Net\1 - AspNet\AppMvcCompleta\MinhaAppMvcCompleta\src\ma9.App\Views\_ViewImports.cshtml"
-using ma9.App.Models;
+using ma9.App.ViewModels;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d6a5625cc8fb4476f348b0fe9041c550465d8bf9", @"/Views/Shared/Error.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5fe629b890e9203fd4cc482ae4ff62608e2bd9c7", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"caabaf8d15bdd4e33d2a51bd5999b8f47a1ddaa3", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared_Error : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ErrorViewModel>
     {
         #pragma warning disable 1998

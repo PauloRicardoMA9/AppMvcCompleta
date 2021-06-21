@@ -68,6 +68,14 @@
               "target": "Package",
               "version": "[3.1.15, )"
             },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
+            "automapper.extensions.microsoft.dependencyinjection": {
+              "target": "Package",
+              "version": "[8.1.1, )"
+            },
             "microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.15, )"
