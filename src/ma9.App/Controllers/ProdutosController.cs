@@ -80,8 +80,7 @@ namespace ma9.App.Controllers
         {
             if (id != produtoViewModel.Id) return NotFound();
 
-            var produtoAtualizacao = await ObterProduto(id);
-            produtoViewModel.Fornecedor = produtoAtualizacao.Fornecedor;
+            var produtoAtualizacao = await _produtoRepository.ObterProdutoFornecedor(id);
             produtoViewModel.Imagem = produtoAtualizacao.Imagem;
             if (!ModelState.IsValid) return View(produtoViewModel);
 
@@ -101,7 +100,7 @@ namespace ma9.App.Controllers
             produtoAtualizacao.Valor = produtoViewModel.Valor;
             produtoAtualizacao.Ativo = produtoViewModel.Ativo;
 
-            await _produtoRepository.Atualizar(_mapper.Map<Produto>(produtoViewModel));
+            await _produtoRepository.Atualizar(_mapper.Map<Produto>(produtoAtualizacao));
 
             return RedirectToAction("Index");
         }

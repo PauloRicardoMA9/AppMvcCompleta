@@ -16,7 +16,7 @@ namespace ma9.Data.Repository
         public async Task<Produto> ObterProdutoFornecedor(Guid id)
         {
             return await Db.Produtos.AsNoTracking()
-                .Include(produto => produto.Fornecedor)
+                .Include(fornecedor => fornecedor.Fornecedor)
                 .FirstOrDefaultAsync(produto => produto.Id == id);
         }
 

@@ -1,11 +1,6 @@
-using ma9.App.Data;
-using ma9.Business.Interfaces;
-using ma9.Data.Context;
-using ma9.Data.Repository;
+using ma9.App.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,33 +9,19 @@ namespace ma9.App
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ApplicationDbContext")));
-
-            services.AddDbContext<MeuDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("MeuDbContext")));
-
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-
+            services.AddContextConfiguration(Configuration);
             services.AddAutoMapper(typeof(Startup));
-
-            services.AddControllersWithViews();
-            services.AddRazorPages();
-
-            services.AddScoped<MeuDbContext>();
-            services.AddScoped<IProdutoRepository, ProdutoRepository>();
-            services.AddScoped<IFornecedorRepository, FornecedorRepository>();
-            services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+            services.AddMvcConfiguration();
+            services.ResolveDependencies();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -55,19 +36,17 @@ namespace ma9.App
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseGlobalizationConfig();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

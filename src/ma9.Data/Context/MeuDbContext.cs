@@ -21,7 +21,7 @@ namespace ma9.Data.Context
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(MeuDbContext).Assembly);
 
-            // Desativar o delete cascade
+            // delete cascade
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(entity => entity.GetForeignKeys()))
             {
                 relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
