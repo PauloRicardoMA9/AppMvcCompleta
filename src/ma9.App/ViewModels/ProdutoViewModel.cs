@@ -23,6 +23,7 @@ namespace ma9.App.ViewModels
         [StringLength(1000, ErrorMessage = "O campo {0} precisa ter no máximo {1} caracteres.")]
         public string Descricao { get; set; }
 
+        [DisplayName("Imagem do Produto")]
         public IFormFile ImagemUpload { get; set; }
 
         public string Imagem { get; set; }
