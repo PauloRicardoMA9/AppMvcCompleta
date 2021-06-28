@@ -15,7 +15,7 @@ namespace ma9.Data.Repository
         {
             return await Db.Fornecedores.AsNoTracking()
                 .Include(fornecedor => fornecedor.Endereco)
-                .FirstOrDefaultAsync(fornecedor=> fornecedor.Id == id);
+                .FirstOrDefaultAsync(fornecedor => fornecedor.Id == id);
         }
 
         public async Task<Fornecedor> ObterFornecedorProdutosEndereco(Guid id)
