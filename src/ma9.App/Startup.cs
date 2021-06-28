@@ -19,6 +19,7 @@ namespace ma9.App
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddContextConfiguration(Configuration);
+            services.AddIdentityConfiguration();
             services.AddAutoMapper(typeof(Startup));
             services.AddMvcConfiguration();
             services.ResolveDependencies();

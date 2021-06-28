@@ -9,6 +9,7 @@ using ma9.Business.Models;
 
 namespace ma9.App.Controllers
 {
+    [Route("fornecedores")]
     public class FornecedoresController : BaseController
     {
         private readonly IFornecedorRepository _fornecedorRepository;
@@ -24,11 +25,13 @@ namespace ma9.App.Controllers
             _enderecoRepository = enderecoRepository;
         }
 
+        [Route("lista")]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos()));
         }
 
+        [Route("detalhes/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
             var fornecedorViewModel = await ObterFornecedorEndereco(id);
@@ -38,6 +41,7 @@ namespace ma9.App.Controllers
             return View(fornecedorViewModel);
         }
 
+        [Route("cadastrar")]
         public IActionResult Create()
         {
             return View();
@@ -45,6 +49,7 @@ namespace ma9.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("cadastrar")]
         public async Task<IActionResult> Create(FornecedorViewModel fornecedorViewModel)
         {
             if (!ModelState.IsValid) return View(fornecedorViewModel);
@@ -55,6 +60,7 @@ namespace ma9.App.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("editar/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var fornecedorViewModel = await ObterFornecedorProdutosEndereco(id);
@@ -66,6 +72,7 @@ namespace ma9.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("editar/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id, FornecedorViewModel fornecedorViewModel)
         {
             if (id != fornecedorViewModel.Id) return NotFound();
@@ -78,6 +85,7 @@ namespace ma9.App.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("deletar/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var fornecedorViewModel = await ObterFornecedorEndereco(id);
@@ -87,6 +95,7 @@ namespace ma9.App.Controllers
             return View(fornecedorViewModel);
         }
 
+        [Route("deletar/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -100,6 +109,7 @@ namespace ma9.App.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("obter-endereco/{id:guid}")]
         public async Task<IActionResult> ObterEndereco(Guid id)
         {
             var fornecedor = await ObterFornecedorEndereco(id);
@@ -112,6 +122,7 @@ namespace ma9.App.Controllers
             return PartialView("_DetalhesEndereco", fornecedor);
         }
 
+        [Route("atualizar-endereco/{id:guid}")]
         public async Task<IActionResult> AtualizarEndereco(Guid id)
         {
             var fornecedor = await ObterFornecedorEndereco(id);
@@ -126,6 +137,7 @@ namespace ma9.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("atualizar-endereco/{id:guid}")]
         public async Task<IActionResult> AtualizarEndereco(FornecedorViewModel fornecedorViewModel)
         {
             ModelState.Remove("Nome");

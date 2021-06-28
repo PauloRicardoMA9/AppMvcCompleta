@@ -11,6 +11,7 @@ using System.IO;
 
 namespace ma9.App.Controllers
 {
+    [Route("produtos")]
     public class ProdutosController : BaseController
     {
         private readonly IProdutoRepository _produtoRepository;
@@ -26,11 +27,13 @@ namespace ma9.App.Controllers
             _mapper = mapper;
         }
 
+        [Route("lista")]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosFornecedores()));
         }
 
+        [Route("detalhes")]
         public async Task<IActionResult> Details(Guid id)
         {
             var produtoViewModel = await ObterProduto(id);
@@ -39,6 +42,7 @@ namespace ma9.App.Controllers
             return View(produtoViewModel);
         }
 
+        [Route("cadastrar")]
         public async Task<IActionResult> Create()
         {
             var produtoViewModel = await PopularFornecedores(new ProdutoViewModel());
@@ -47,6 +51,7 @@ namespace ma9.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("cadastrar")]
         public async Task<IActionResult> Create(ProdutoViewModel produtoViewModel)
         {
             produtoViewModel = await PopularFornecedores(produtoViewModel);
@@ -65,6 +70,7 @@ namespace ma9.App.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("editar/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var produtoViewModel = await ObterProduto(id);
@@ -76,6 +82,7 @@ namespace ma9.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("editar/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id, ProdutoViewModel produtoViewModel)
         {
             if (id != produtoViewModel.Id) return NotFound();
@@ -105,6 +112,7 @@ namespace ma9.App.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("deletar/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var produto = await ObterProduto(id);
@@ -116,6 +124,7 @@ namespace ma9.App.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("deletar/{id:guid}")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var produto = await ObterProduto(id);
