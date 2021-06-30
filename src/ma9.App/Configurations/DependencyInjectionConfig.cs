@@ -1,5 +1,7 @@
 ﻿using ma9.App.Extensions;
 using ma9.Business.Interfaces;
+using ma9.Business.Notifications;
+using ma9.Business.Services;
 using ma9.Data.Context;
 using ma9.Data.Repository;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
@@ -16,6 +18,10 @@ namespace ma9.App.Configurations
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
             services.AddScoped<IEnderecoRepository, EnderecoRepository>();
             services.AddSingleton<IValidationAttributeAdapterProvider, MoedaValidationAttributeAdapterProvider>();
+
+            services.AddScoped<INotificador, Notificador>();
+            services.AddScoped<IFornecedorService, FornecedorService>();
+            services.AddScoped<IProdutoService, ProdutoService>();
 
             return services;
         }

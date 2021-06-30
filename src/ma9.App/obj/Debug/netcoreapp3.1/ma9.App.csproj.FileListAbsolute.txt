@@ -187,3 +187,5 @@ C:\Users\paulo\Documents\Developer\Projetos\.Net\1 - AspNet\AppMvcCompleta\Minha
 C:\Users\paulo\Documents\Developer\Projetos\.Net\1 - AspNet\AppMvcCompleta\MinhaAppMvcCompleta\src\ma9.App\obj\Debug\netcoreapp3.1\Razor\Views\Fornecedores\_AtualizarEndereco.cshtml.g.cs
 C:\Users\paulo\Documents\Developer\Projetos\.Net\1 - AspNet\AppMvcCompleta\MinhaAppMvcCompleta\src\ma9.App\bin\Debug\netcoreapp3.1\appsettings.Production.json
 C:\Users\paulo\Documents\Developer\Projetos\.Net\1 - AspNet\AppMvcCompleta\MinhaAppMvcCompleta\src\ma9.App\bin\Debug\netcoreapp3.1\appsettings.Staging.json
+C:\Users\paulo\Documents\Developer\Projetos\.Net\1 - AspNet\AppMvcCompleta\MinhaAppMvcCompleta\src\ma9.App\bin\Debug\netcoreapp3.1\FluentValidation.dll
+C:\Users\paulo\Documents\Developer\Projetos\.Net\1 - AspNet\AppMvcCompleta\MinhaAppMvcCompleta\src\ma9.App\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Summary\Default.cshtml.g.cs
