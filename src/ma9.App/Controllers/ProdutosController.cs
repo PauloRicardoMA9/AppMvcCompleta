@@ -8,10 +8,13 @@ using AutoMapper;
 using ma9.Business.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
+using ma9.App.Extensions;
 
 namespace ma9.App.Controllers
 {
     [Route("produtos")]
+    [Authorize]
     public class ProdutosController : BaseController
     {
         private readonly IProdutoRepository _produtoRepository;
@@ -32,12 +35,14 @@ namespace ma9.App.Controllers
         }
 
         [Route("lista")]
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosFornecedores()));
         }
 
         [Route("detalhes")]
+        [AllowAnonymous]
         public async Task<IActionResult> Details(Guid id)
         {
             var produtoViewModel = await ObterProduto(id);
@@ -47,6 +52,7 @@ namespace ma9.App.Controllers
         }
 
         [Route("cadastrar")]
+        [ClaimsAuthorize("Produto", "Adicionar")]
         public async Task<IActionResult> Create()
         {
             var produtoViewModel = await PopularFornecedores(new ProdutoViewModel());
@@ -56,6 +62,7 @@ namespace ma9.App.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("cadastrar")]
+        [ClaimsAuthorize("Produto", "Adicionar")]
         public async Task<IActionResult> Create(ProdutoViewModel produtoViewModel)
         {
             produtoViewModel = await PopularFornecedores(produtoViewModel);
@@ -77,6 +84,7 @@ namespace ma9.App.Controllers
         }
 
         [Route("editar/{id:guid}")]
+        [ClaimsAuthorize("Produto", "Editar")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var produtoViewModel = await ObterProduto(id);
@@ -89,6 +97,7 @@ namespace ma9.App.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("editar/{id:guid}")]
+        [ClaimsAuthorize("Produto", "Editar")]
         public async Task<IActionResult> Edit(Guid id, ProdutoViewModel produtoViewModel)
         {
             if (id != produtoViewModel.Id) return NotFound();
@@ -121,6 +130,7 @@ namespace ma9.App.Controllers
         }
 
         [Route("deletar/{id:guid}")]
+        [ClaimsAuthorize("Produto", "Excluir")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var produto = await ObterProduto(id);
@@ -133,6 +143,7 @@ namespace ma9.App.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Route("deletar/{id:guid}")]
+        [ClaimsAuthorize("Produto", "Excluir")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var produto = await ObterProduto(id);
